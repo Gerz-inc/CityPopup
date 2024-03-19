@@ -20,7 +20,12 @@ public struct CPAlertStyle {
     // MARK: - Internal properties
     let cornerRadius: CGFloat
     
-    private(set) lazy var cornerCurve: CALayerCornerCurve = .circular
+    private var _cornerCurve: CALayerCornerCurve?
+    @available(iOS 13.0, *)
+    private(set) var cornerCurve: CALayerCornerCurve {
+        get { _cornerCurve ?? .circular }
+        set { _cornerCurve = newValue }
+    }
     
     let backgroundColor: UIColor
     
@@ -84,6 +89,7 @@ public struct CPAlertStyle {
         self.spacingBetweenActions = spacingBetweenActions
     }
     
+    @available(iOS 13.0, *)
     public init(
         cornerRadius: CGFloat = 8,
         cornerCurve: CALayerCornerCurve = .circular,
