@@ -112,7 +112,11 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = style.backgroundColor
         layer.cornerRadius = style.cornerRadius
-        clipsToBounds = true
+        layer.shadowColor = style.shadowColor.cgColor
+        layer.shadowOffset = style.shadowOffset
+        layer.shadowRadius = style.shadowRadius
+        layer.shadowOpacity = style.shadowOpacity
+        clipsToBounds = false
     }
     
     // MARK: - Lifecycle

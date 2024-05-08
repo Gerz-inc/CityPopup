@@ -13,6 +13,11 @@ public struct CPToastStyle {
     let cornerRadius: CGFloat
     let backgroundColor: UIColor
     
+    let shadowColor: UIColor
+    let shadowOffset: CGSize
+    let shadowRadius: CGFloat
+    let shadowOpacity: Float
+    
     let contentMargin: UIEdgeInsets
     
     let titleFont: UIFont
@@ -33,6 +38,10 @@ public struct CPToastStyle {
     public init(
         cornerRadius: CGFloat = 8,
         backgroundColor: UIColor = CPColor.white_gray14,
+        shadowColor: UIColor = UIColor.clear,
+        shadowOffset: CGSize = CGSize(width: 0, height: 3),
+        shadowRadius: CGFloat = 6.0,
+        shadowOpacity: Float = 0.3,
         contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
         titleFont: UIFont = .systemFont(ofSize: 18),
         titleTextAlignment: NSTextAlignment = .center,
@@ -48,6 +57,10 @@ public struct CPToastStyle {
     {
         self.cornerRadius = cornerRadius
         self.backgroundColor = backgroundColor
+        self.shadowColor = shadowColor
+        self.shadowOffset = shadowOffset
+        self.shadowRadius = shadowRadius
+        self.shadowOpacity = shadowOpacity
         self.contentMargin = contentMargin
         self.titleFont = titleFont
         self.titleTextAlignment = titleTextAlignment
