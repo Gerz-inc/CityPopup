@@ -36,7 +36,9 @@ public struct CPAlertStyle {
     
     let contentMargin: UIEdgeInsets
     
-    let coverViewHeight: CGFloat?
+    let headerViewHeight: CGFloat?
+    let centerViewHeight: CGFloat?
+    let footerViewHeight: CGFloat?
     
     let titleFont: UIFont
     let titleColor: UIColor
@@ -64,7 +66,9 @@ public struct CPAlertStyle {
         shadowRadius: CGFloat = 6.0,
         shadowOpacity: Float = 0.3,
         contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
-        coverViewHeight: CGFloat? = nil,
+        headerViewHeight: CGFloat? = nil,
+        centerViewHeight: CGFloat? = nil,
+        footerViewHeight: CGFloat? = nil,
         titleFont: UIFont = .boldSystemFont(ofSize: 24),
         titleColor: UIColor = CPColor.black_white,
         titleTextAlignment: NSTextAlignment = .center,
@@ -86,7 +90,9 @@ public struct CPAlertStyle {
         self.shadowRadius = shadowRadius
         self.shadowOpacity = shadowOpacity
         self.contentMargin = contentMargin
-        self.coverViewHeight = coverViewHeight
+        self.headerViewHeight = headerViewHeight
+        self.centerViewHeight = centerViewHeight
+        self.footerViewHeight = footerViewHeight
         self.titleFont = titleFont
         self.titleColor = titleColor
         self.titleTextAlignment = titleTextAlignment
@@ -112,7 +118,9 @@ public struct CPAlertStyle {
         shadowRadius: CGFloat = 6.0,
         shadowOpacity: Float = 0.3,
         contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
-        coverViewHeight: CGFloat? = nil,
+        headerViewHeight: CGFloat? = nil,
+        centerViewHeight: CGFloat? = nil,
+        footerViewHeight: CGFloat? = nil,
         titleFont: UIFont = .boldSystemFont(ofSize: 24),
         titleColor: UIColor = CPColor.black_white,
         titleTextAlignment: NSTextAlignment = .center,
@@ -134,7 +142,9 @@ public struct CPAlertStyle {
         self.shadowRadius = shadowRadius
         self.shadowOpacity = shadowOpacity
         self.contentMargin = contentMargin
-        self.coverViewHeight = coverViewHeight
+        self.headerViewHeight = headerViewHeight
+        self.centerViewHeight = centerViewHeight
+        self.footerViewHeight = footerViewHeight
         self.titleFont = titleFont
         self.titleColor = titleColor
         self.titleTextAlignment = titleTextAlignment

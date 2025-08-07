@@ -19,7 +19,11 @@ public final class CPAlertView: CPPopupView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .vertical
     }
-    private var coverView: UIView?
+    
+    private var headerView: UIView?
+    private var centerView: UIView?
+    private var footerView: UIView?
+    
     private lazy var titleLabel = UILabel() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = style.titleFont
@@ -118,11 +122,25 @@ public final class CPAlertView: CPPopupView {
 // MARK: - Public methods
 extension CPAlertView {
     
-    /// Add a cover view which will be displayed on top of the alert.
+    /// Add a header view which will be displayed on top of the alert.
     /// - Parameter view: Some view as a cover.
-    public func addCover(_ view: UIView) {
+    public func addHeader(_ view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
-        coverView = view
+        headerView = view
+    }
+    
+    /// Add a center view which will be displayed between message and actions of the alert.
+    /// - Parameter view: Some view as a cover.
+    public func addContent(_ view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        centerView = view
+    }
+    
+    /// Add a footer view which will be displayed on bottom of the alert.
+    /// - Parameter view: Some view as a cover.
+    public func addFooter(_ view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        footerView = view
     }
     
     /// Add action object to the alert.
@@ -192,11 +210,11 @@ extension CPAlertView {
             backgroundColor: .clear
         )
         
-        // Cover view
-        if let coverView = coverView {
-            contentStackView.addArrangedSubview(coverView)
-            if let coverViewHeight = style.coverViewHeight {
-                coverView.heightAnchor.constraint(equalToConstant: coverViewHeight).isActive = true
+        // Header view
+        if let headerView {
+            contentStackView.addArrangedSubview(headerView)
+            if let headerViewHeight = style.headerViewHeight {
+                headerView.heightAnchor.constraint(equalToConstant: headerViewHeight).isActive = true
             }
         }
         
@@ -216,6 +234,14 @@ extension CPAlertView {
             messageLabel.attributedText = attributedMessage
             contentStackView.addArrangedSubview(messageLabel)
             messageLabel.backgroundColor = .clear
+        }
+        
+        // Center view
+        if let centerView {
+            contentStackView.addArrangedSubview(centerView)
+            if let centerViewHeight = style.centerViewHeight {
+                centerView.heightAnchor.constraint(equalToConstant: centerViewHeight).isActive = true
+            }
         }
         
         if contentStackView.arrangedSubviews.isEmpty {
@@ -249,12 +275,20 @@ extension CPAlertView {
             }
         }
         
+        // Footer view
+        if let footerView {
+            contentStackView.addArrangedSubview(footerView)
+            if let footerViewHeight = style.footerViewHeight {
+                footerView.heightAnchor.constraint(equalToConstant: footerViewHeight).isActive = true
+            }
+        }
+        
         setupContentSpacings()
     }
     
     private func setupContentSpacings() {
-        if let coverView = coverView {
-            contentStackView.setSpacing(style.spacingAfterCoverView, after: coverView)
+        if let headerView {
+            contentStackView.setSpacing(style.spacingAfterCoverView, after: headerView)
         }
         if title != nil {
             contentStackView.setSpacing(style.spacingAfterTitle, after: titleLabel)
