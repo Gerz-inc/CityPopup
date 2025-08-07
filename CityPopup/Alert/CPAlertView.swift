@@ -50,6 +50,11 @@ public final class CPAlertView: CPPopupView {
     private let attributedMessage: NSAttributedString?
     private var style: CPAlertStyle
     
+    private var lastFirstResponder: UIView?
+    public override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
     // MARK: - Init
     public init(title: String?, message: String?, style: CPAlertStyle = .default) {
         self.title = title
@@ -95,6 +100,17 @@ public final class CPAlertView: CPPopupView {
     public override func willAppear() {
         super.willAppear()
         setupLayout()
+        
+        if let window = UIApplication.shared.windows.first {
+            lastFirstResponder = window.firstResponder
+            lastFirstResponder?.resignFirstResponder()
+        }
+    }
+    
+    public override func willDisappear() {
+        super.willDisappear()
+        
+        lastFirstResponder?.becomeFirstResponder()
     }
     
 }
@@ -256,6 +272,23 @@ extension CPAlertView {
     @objc
     private func actionTouched() {
         hide()
+    }
+    
+}
+
+// MARK: - Private extensions
+fileprivate extension UIView {
+    
+    var firstResponder: UIView? {
+        guard !isFirstResponder else { return self }
+
+        for subview in subviews {
+            if let firstResponder = subview.firstResponder {
+                return firstResponder
+            }
+        }
+
+        return nil
     }
     
 }
