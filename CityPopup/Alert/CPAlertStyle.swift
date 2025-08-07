@@ -18,16 +18,21 @@ public struct CPAlertStyle {
     }
     
     // MARK: - Internal properties
-    let cornerRadius: CGFloat
     
-    private var _cornerCurve: CALayerCornerCurve?
+    private var _cornerCurve: Any?
     @available(iOS 13.0, *)
     private(set) var cornerCurve: CALayerCornerCurve {
-        get { _cornerCurve ?? .circular }
+        get { _cornerCurve as? CALayerCornerCurve ?? .circular }
         set { _cornerCurve = newValue }
     }
     
+    let cornerRadius: CGFloat
     let backgroundColor: UIColor
+    
+    let shadowColor: UIColor
+    let shadowOffset: CGSize
+    let shadowRadius: CGFloat
+    let shadowOpacity: Float
     
     let contentMargin: UIEdgeInsets
     
@@ -54,6 +59,10 @@ public struct CPAlertStyle {
     public init(
         cornerRadius: CGFloat = 8,
         backgroundColor: UIColor = CPColor.white_gray14,
+        shadowColor: UIColor = UIColor.clear,
+        shadowOffset: CGSize = CGSize(width: 0, height: 3),
+        shadowRadius: CGFloat = 6.0,
+        shadowOpacity: Float = 0.3,
         contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
         coverViewHeight: CGFloat? = nil,
         titleFont: UIFont = .boldSystemFont(ofSize: 24),
@@ -72,6 +81,10 @@ public struct CPAlertStyle {
     {
         self.cornerRadius = cornerRadius
         self.backgroundColor = backgroundColor
+        self.shadowColor = shadowColor
+        self.shadowOffset = shadowOffset
+        self.shadowRadius = shadowRadius
+        self.shadowOpacity = shadowOpacity
         self.contentMargin = contentMargin
         self.coverViewHeight = coverViewHeight
         self.titleFont = titleFont
@@ -94,6 +107,10 @@ public struct CPAlertStyle {
         cornerRadius: CGFloat = 8,
         cornerCurve: CALayerCornerCurve = .circular,
         backgroundColor: UIColor = CPColor.white_gray14,
+        shadowColor: UIColor = UIColor.clear,
+        shadowOffset: CGSize = CGSize(width: 0, height: 3),
+        shadowRadius: CGFloat = 6.0,
+        shadowOpacity: Float = 0.3,
         contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
         coverViewHeight: CGFloat? = nil,
         titleFont: UIFont = .boldSystemFont(ofSize: 24),
@@ -112,6 +129,10 @@ public struct CPAlertStyle {
     {
         self.cornerRadius = cornerRadius
         self.backgroundColor = backgroundColor
+        self.shadowColor = shadowColor
+        self.shadowOffset = shadowOffset
+        self.shadowRadius = shadowRadius
+        self.shadowOpacity = shadowOpacity
         self.contentMargin = contentMargin
         self.coverViewHeight = coverViewHeight
         self.titleFont = titleFont

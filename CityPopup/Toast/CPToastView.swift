@@ -112,6 +112,9 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = style.backgroundColor
         layer.cornerRadius = style.cornerRadius
+        if #available(iOS 13.0, *) {
+            layer.cornerCurve = style.cornerCurve
+        }
         layer.shadowColor = style.shadowColor.cgColor
         layer.shadowOffset = style.shadowOffset
         layer.shadowRadius = style.shadowRadius

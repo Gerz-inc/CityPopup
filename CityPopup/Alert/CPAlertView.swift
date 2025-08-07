@@ -84,7 +84,11 @@ public final class CPAlertView: CPPopupView {
         if #available(iOS 13.0, *) {
             layer.cornerCurve = style.cornerCurve
         }
-        clipsToBounds = true
+        layer.shadowColor = style.shadowColor.cgColor
+        layer.shadowOffset = style.shadowOffset
+        layer.shadowRadius = style.shadowRadius
+        layer.shadowOpacity = style.shadowOpacity
+        clipsToBounds = false
     }
     
     // MARK: - Lifecycle
@@ -164,12 +168,12 @@ extension CPAlertView {
         widthAnchor.constraint(greaterThanOrEqualToConstant: Spec.minimumWidth).isActive = true
         
         // Content
-        contentStackView.backgroundColor = backgroundColor
+        contentStackView.backgroundColor = .clear
         embedInScrollView(
             view: contentStackView,
             offsets: style.contentMargin,
             scrollingByAxis: .vertical,
-            backgroundColor: backgroundColor
+            backgroundColor: .clear
         )
         
         // Cover view
@@ -183,7 +187,7 @@ extension CPAlertView {
         // Title
         if let title = title {
             titleLabel.text = title
-            titleLabel.backgroundColor = backgroundColor
+            titleLabel.backgroundColor = .clear
             contentStackView.addArrangedSubview(titleLabel)
         }
         
@@ -191,11 +195,11 @@ extension CPAlertView {
         if let message = message {
             messageLabel.text = message
             contentStackView.addArrangedSubview(messageLabel)
-            messageLabel.backgroundColor = backgroundColor
+            messageLabel.backgroundColor = .clear
         } else if let attributedMessage = attributedMessage {
             messageLabel.attributedText = attributedMessage
             contentStackView.addArrangedSubview(messageLabel)
-            messageLabel.backgroundColor = backgroundColor
+            messageLabel.backgroundColor = .clear
         }
         
         if contentStackView.arrangedSubviews.isEmpty {
@@ -204,7 +208,7 @@ extension CPAlertView {
         
         // Actions
         if !actions.isEmpty {
-            actionsStackView.backgroundColor = backgroundColor
+            actionsStackView.backgroundColor = .clear
             
             switch style.actionsAxis {
             case .horizontal(let shouldFitIntoContainer):
@@ -216,7 +220,7 @@ extension CPAlertView {
                         view: actionsStackView,
                         offsets: .zero,
                         scrollingByAxis: style.actionsAxis.axis,
-                        backgroundColor: backgroundColor
+                        backgroundColor: .clear
                     )
                 }
                 

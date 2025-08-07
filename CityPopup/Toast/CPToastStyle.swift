@@ -10,6 +10,13 @@ import UIKit
 public struct CPToastStyle {
     
     // MARK: - Internal properties
+    private var _cornerCurve: Any?
+    @available(iOS 13.0, *)
+    private(set) var cornerCurve: CALayerCornerCurve {
+        get { _cornerCurve as? CALayerCornerCurve ?? .circular }
+        set { _cornerCurve = newValue }
+    }
+    
     let cornerRadius: CGFloat
     let backgroundColor: UIColor
     
@@ -75,6 +82,49 @@ public struct CPToastStyle {
         self.horizontalSpacingAfterTitle = horizontalSpacingAfterTitle
     }
     
+    @available(iOS 13.0, *)
+    public init(
+        cornerRadius: CGFloat = 8,
+        cornerCurve: CALayerCornerCurve = .circular,
+        backgroundColor: UIColor = CPColor.white_gray14,
+        shadowColor: UIColor = UIColor.clear,
+        shadowOffset: CGSize = CGSize(width: 0, height: 3),
+        shadowRadius: CGFloat = 6.0,
+        shadowOpacity: Float = 0.3,
+        contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
+        titleFont: UIFont = .systemFont(ofSize: 18),
+        titleTextAlignment: NSTextAlignment = .center,
+        titleNumberOfLines: Int = 0,
+        titleTextColor: UIColor = CPColor.black_white,
+        messageFont: UIFont = .systemFont(ofSize: 14),
+        messageTextAligment: NSTextAlignment = .center,
+        messageNumberOfLines: Int = 0,
+        messageTextColor: UIColor = CPColor.black_white,
+        horizontalSpacingAfterLeadingContainer: CGFloat = 8,
+        verticalSpacingAfterTitle: CGFloat = 8,
+        horizontalSpacingAfterTitle: CGFloat = 8)
+    {
+        self.cornerRadius = cornerRadius
+        self.backgroundColor = backgroundColor
+        self.shadowColor = shadowColor
+        self.shadowOffset = shadowOffset
+        self.shadowRadius = shadowRadius
+        self.shadowOpacity = shadowOpacity
+        self.contentMargin = contentMargin
+        self.titleFont = titleFont
+        self.titleTextAlignment = titleTextAlignment
+        self.titleNumberOfLines = titleNumberOfLines
+        self.titleTextColor = titleTextColor
+        self.messageFont = messageFont
+        self.messageTextAligment = messageTextAligment
+        self.messageNumberOfLines = messageNumberOfLines
+        self.messageTextColor = messageTextColor
+        self.horizontalSpacingAfterLeadingContainer = horizontalSpacingAfterLeadingContainer
+        self.verticalSpacingAfterTitle = verticalSpacingAfterTitle
+        self.horizontalSpacingAfterTitle = horizontalSpacingAfterTitle
+        
+        self.cornerCurve = cornerCurve
+    }
 }
 
 // MARK: - Public predefined style
